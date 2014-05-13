@@ -3,7 +3,12 @@ library("sqldf")
 # Url at which the data set is located
 fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 # Download zip file
-download.file(fileUrl, destfile="household_power_consumption.zip", method="curl")
+if(!file.exists("./exdata-data-household_power_consumption.zip")){
+    download.file(fileUrl, destfile="household_power_consumption.zip", method="curl")
+    }
+if(!file.exists("./household_power_consumption.txt")){
+    unzip("./exdata-data-household_power_consumption.zip", exdir="./")
+    }
 require("sqldf")
 myfile <- "household_power_consumption.txt"
 mySql <- "SELECT * from file WHERE Date = '1/2/2007' OR Date = '2/2/2007'"
